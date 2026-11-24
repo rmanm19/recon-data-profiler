@@ -47,10 +47,10 @@ def _preambulo_carregamento(payload: dict[str, Any]) -> str:
         if "::" in origem:
             arquivo, aba = origem.split("::", 1)
             linhas.append(
-                f'{_var(tabela["nome"])} = pd.read_excel(r"{arquivo}", sheet_name="{aba}")'
+                f'{_var(tabela["nome"])} = pd.read_excel({arquivo!r}, sheet_name={aba!r})'
             )
         elif origem.lower().endswith((".xlsx", ".xls", ".xlsb")):
-            linhas.append(f'{_var(tabela["nome"])} = pd.read_excel(r"{origem}")')
+            linhas.append(f'{_var(tabela["nome"])} = pd.read_excel({origem!r})')
         else:
             linhas.append(f'{_var(tabela["nome"])} = pd.read_csv(r"{origem}")')
     linhas.append("```")

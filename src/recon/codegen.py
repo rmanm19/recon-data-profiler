@@ -39,11 +39,11 @@ def _leitura(payload: dict[str, Any], caminho_origem: str) -> list[str]:
     tabela = str(meta["tabela"])
     if caminho_origem.lower().endswith((".xlsx", ".xls", ".xlsb")):
         aba = tabela.split("__", 1)[-1] if "__" in tabela else 0
-        argumentos = [f"r{_literal(caminho_origem)}", f"sheet_name={_literal(aba)}"]
+        argumentos = [f"{_literal(caminho_origem)}", f"sheet_name={_literal(aba)}"]
         argumentos += extras
         leitura = f"pd.read_excel({', '.join(argumentos)})"
     else:
-        argumentos = [f"r{_literal(caminho_origem)}"]
+        argumentos = [f"{_literal(caminho_origem)}"]
 
         if layout.get("separador") and layout["separador"] != ",":
             argumentos.append(f"sep={_literal(layout['separador'])}")
